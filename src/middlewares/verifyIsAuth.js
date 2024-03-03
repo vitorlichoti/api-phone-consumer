@@ -1,17 +1,18 @@
 const axios = require('axios');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 class VerifyIsAuth {
 
   static async checkIfUserIsAuth(req, res, next) {
     const { authorization } = req.headers;
     try {
-      const response = await axios.get('http://localhost:3000/api/auth/validate', {
+      const response = await axios.get(`${process.env.AUTH_API_URL}/validate`, {
         headers: {
           authorization,
         },
       });
-
-      console.log('response', response.status);
 
       if (response.status === 200) {
         next();
