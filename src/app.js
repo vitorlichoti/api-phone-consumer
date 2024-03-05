@@ -5,7 +5,7 @@ const productRouter = require('./routes/product.routes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('../docs/swaggerOptions');
 
-const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.3.0/swagger-ui.min.css";
 
 const app = express();
 
