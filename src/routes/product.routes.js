@@ -30,6 +30,10 @@ productRouter.get('/api/products', VerifyIsAuth.checkIfUserIsAuth, productContro
  *   get:
  *     summary: Return product by id.
  *     description: Return just product that contains id passed by parameter.
+ *     headers:
+ *       authorization:
+ *         type: string
+ *       description: Token for user authentication.
  *     parameters:
  *       - in: path
  *         name: id
@@ -50,6 +54,10 @@ productRouter.get('/api/products/:id', VerifyIsAuth.checkIfUserIsAuth, productCo
  *   post:
  *     summary: Post new product.
  *     description: Post new product and store in DB.
+ *     headers:
+ *       authorization:
+ *         type: string
+ *       description: Token for user authentication.
  *     requestBody:
  *       required: true
  *       content:
@@ -83,6 +91,10 @@ productRouter.post('/api/products', VerifyIsAuth.checkIfUserIsAuth, FieldsNewPro
  *   put:
  *     summary: Update product by ID.
  *     description: Update product information in the database.
+ *     headers:
+ *       authorization:
+ *         type: string
+ *       description: Token for user authentication.
  *     parameters:
  *       - in: path
  *         name: id
@@ -128,6 +140,10 @@ productRouter.put('/api/products/:id', VerifyIsAuth.checkIfUserIsAuth, FieldsNew
  *         required: true
  *         schema:
  *           type: string
+ *     headers:
+ *       authorization:
+ *         type: string
+ *       description: Token for user authentication.
  *     responses:
  *       200:
  *         description: Success deleted.
