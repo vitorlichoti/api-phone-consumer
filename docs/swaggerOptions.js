@@ -12,6 +12,7 @@ const options = {
       {
         url: 'http://localhost:3001',
         description: "My API Documentation",
+        url: 'https://api-phone-consumer.vercel.app',
       },
     ],
   },
