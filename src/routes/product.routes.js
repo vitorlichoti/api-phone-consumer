@@ -14,11 +14,13 @@ const productController = new ProductController();
  *   get:
  *     summary: Return all products.
  *     description: Return all products storage in database.
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: Returns array with products.
  *       401:
- *         description: Unnauthorized.
+ *         description: Unauthorized.
  *       404:
  *         description: Not found. No products in database
  */
@@ -30,21 +32,19 @@ productRouter.get('/api/products', VerifyIsAuth.checkIfUserIsAuth, productContro
  *   get:
  *     summary: Return product by id.
  *     description: Return just product that contains id passed by parameter.
- *     headers:
- *       authorization:
- *         type: string
- *       description: Token for user authentication.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: Returns a product.
  *       401:
- *         description: Not found.
+ *         description: Unauthorized.
  */
 productRouter.get('/api/products/:id', VerifyIsAuth.checkIfUserIsAuth, productController.getProductById);
 
@@ -54,10 +54,6 @@ productRouter.get('/api/products/:id', VerifyIsAuth.checkIfUserIsAuth, productCo
  *   post:
  *     summary: Post new product.
  *     description: Post new product and store in DB.
- *     headers:
- *       authorization:
- *         type: string
- *       description: Token for user authentication.
  *     requestBody:
  *       required: true
  *       content:
@@ -75,13 +71,15 @@ productRouter.get('/api/products/:id', VerifyIsAuth.checkIfUserIsAuth, productCo
  *                 type: string
  *               color:
  *                 type: string
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       201:
  *         description: Product created with success.
  *       400:
  *         description: Bad request. Check if all fields are correct and try again.
  *       401:
- *         description: Not found.
+ *         description: Unauthorized.
  */
 productRouter.post('/api/products', VerifyIsAuth.checkIfUserIsAuth, FieldsNewProductCheck.checkFieldsPostNewProduct, productController.addProduct);
 
@@ -91,10 +89,6 @@ productRouter.post('/api/products', VerifyIsAuth.checkIfUserIsAuth, FieldsNewPro
  *   put:
  *     summary: Update product by ID.
  *     description: Update product information in the database.
- *     headers:
- *       authorization:
- *         type: string
- *       description: Token for user authentication.
  *     parameters:
  *       - in: path
  *         name: id
@@ -118,13 +112,15 @@ productRouter.post('/api/products', VerifyIsAuth.checkIfUserIsAuth, FieldsNewPro
  *                 type: string
  *               color:
  *                 type: string
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: Product updated successfully.
  *       400:
  *         description: Bad request. Check if all fields are correct and try again.
  *       401:
- *         description: Product not found.
+ *         description: Unauthorized.
  */
 productRouter.put('/api/products/:id', VerifyIsAuth.checkIfUserIsAuth, FieldsNewProductCheck.checkFieldsPostNewProduct, productController.updateProduct);
 
@@ -140,15 +136,13 @@ productRouter.put('/api/products/:id', VerifyIsAuth.checkIfUserIsAuth, FieldsNew
  *         required: true
  *         schema:
  *           type: string
- *     headers:
- *       authorization:
- *         type: string
- *       description: Token for user authentication.
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: Success deleted.
  *       401:
- *         description: Not found.
+ *         description: Unauthorized.
  */
 productRouter.delete('/api/products/:id', VerifyIsAuth.checkIfUserIsAuth, productController.deleteProduct);
 
