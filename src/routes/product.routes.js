@@ -18,7 +18,9 @@ const productController = new ProductController();
  *       200:
  *         description: Returns array with products.
  *       401:
- *         description: Not found.
+ *         description: Unnauthorized.
+ *       404:
+ *         description: Not found. No products in database
  */
 productRouter.get('/api/products', VerifyIsAuth.checkIfUserIsAuth, productController.getAllProducts);
 
