@@ -1,5 +1,4 @@
 const ProducRepository = require('../repository/product.repository');
-const axios = require('axios');
 
 class ProductService {
   async getAllProducts() {
@@ -26,6 +25,11 @@ class ProductService {
 
   async addProduct(product) {
     const productRepository = new ProducRepository();
+
+    if (Object.keys(product).includes('details')) { }
+
+    if (Object.keys(product).includes('data')) { }
+
     const productAdded = await productRepository.createProduct(product);
 
     if (!productAdded) {
