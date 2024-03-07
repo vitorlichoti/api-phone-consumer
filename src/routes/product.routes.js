@@ -122,7 +122,7 @@ productRouter.post('/api/products', VerifyIsAuth.checkIfUserIsAuth, FieldsNewPro
  *       401:
  *         description: Unauthorized.
  */
-productRouter.put('/api/products/:id', VerifyIsAuth.checkIfUserIsAuth, FieldsNewProductCheck.checkFieldsPostNewProduct, productController.updateProduct);
+productRouter.put('/api/products/:id', VerifyIsAuth.checkIfUserIsAuth, FieldsNewProductCheck.checkFieldsPutProduct, productController.updateProduct);
 
 /**
  * @swagger

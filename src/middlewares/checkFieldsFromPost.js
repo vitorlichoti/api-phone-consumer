@@ -50,6 +50,25 @@ class FieldsNewProductCheck {
 
     return next();
   }
+
+  static checkFieldsPutProduct(req, res, next) {
+    const newProductFields = req.body;
+    const id = req.params.id;
+
+    // check if body is empty
+    if (Object.keys(newProductFields[0]).length === 0) {
+      return res.status(400).json({ message: 'No fields were sent' });
+    }
+
+    const fieldsRequired = ['name', 'brand', 'model', 'details'];
+
+    // check if all fields are present
+    if (Object.keys(newProductFields[0]).length !== fieldsRequired.length) {
+      return res.status(400).json({ message: 'All fields must be sent' });
+    }
+
+    return next();
+  }
 }
 
 module.exports = FieldsNewProductCheck;

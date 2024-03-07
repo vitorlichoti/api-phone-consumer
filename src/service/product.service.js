@@ -1,4 +1,5 @@
 const ProducRepository = require('../repository/product.repository');
+const StorageByStructure = require('./helper/StorageByStructure');
 
 class ProductService {
   async getAllProducts() {
@@ -26,21 +27,56 @@ class ProductService {
   async addProduct(product) {
     const productRepository = new ProducRepository();
 
-    if (Object.keys(product).includes('details')) { }
+    if (Object.keys(product).includes('details')) {
+      const resultStructure2 = await StorageByStructure.StructureWithDetailsKey(product);
 
-    if (Object.keys(product).includes('data')) { }
+      return resultStructure2;
+    }
 
-    const productAdded = await productRepository.createProduct(product);
+    if (product instanceof Array) {
+      const resultStructure3 = await StorageByStructure.StructureWithDataArray(product, 'data');
 
-    if (!productAdded) {
+      return resultStructure3
+    }
+
+    const productAddedstructure1 = await productRepository.createProduct(product);
+
+    if (!productAddedstructure1) {
       return { code: 500, message: 'Error adding product' }
     }
 
-    return { code: 201, message: `Product named ${productAdded.id} was created` }
+    return { code: 201, message: `Product named ${productAddedstructure1.id} was created` }
   }
 
   async updateProduct(id, product) {
     const productRepository = new ProducRepository();
+
+    if (product instanceof Array) {
+
+      const productSanityDetail = product[0].data.filter((p) => p.id !== undefined)
+      const newProductDetail = product[0].data.filter((p) => p.id === undefined)
+
+      const productExistingDetail = {
+        ...product[0],
+        data: productSanityDetail
+      }
+
+      const productUpdated = await productRepository.updateProduct(id, productExistingDetail);
+
+      if (newProductDetail.length > 0) {
+        const createNewDetail = await productRepository.createNewDetailProduct(id, newProductDetail);
+        if (!createNewDetail) {
+          return { code: 500, message: 'Error updating detail product' }
+        }
+      }
+
+      if (!productUpdated) {
+        return { code: 500, message: 'Error updating product' }
+      }
+
+      return { code: 204, message: productUpdated }
+    }
+
     const productUpdated = await productRepository.updateProduct(id, product);
 
     if (!productUpdated) {

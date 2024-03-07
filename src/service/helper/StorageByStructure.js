@@ -1,9 +1,10 @@
 const ProducRepository = require('../../repository/product.repository');
 
 class StorageByStructure {
-  static StructureWithDetailsKey(structure) {
+  static async StructureWithDetailsKey(structure) {
     const productRepository = new ProducRepository();
 
+    const productAdded = await productRepository.createProduct(structure, 'details');
     /*
       {
         name: "Xiaomi Redmi 9",
@@ -15,11 +16,13 @@ class StorageByStructure {
         price:  10000,
       }
     */
+
+    return { code: 201, message: `Product named ${productAdded.id} was created` }
   }
 
-  static StructureWithDataArray(structure) {
+  static async StructureWithDataArray(structure) {
     const productRepository = new ProducRepository();
-
+    const productAdded = await productRepository.createProduct(structure, 'data');
     /*
         [  
       {
@@ -54,6 +57,7 @@ class StorageByStructure {
         }
       ]
     */
+    return { code: 201, message: `Product named ${productAdded.id} was created` }
   }
 }
 
