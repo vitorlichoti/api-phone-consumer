@@ -57,9 +57,70 @@ This document describes the routes and functionalities of the RESTful API for pr
   - `id`: Unique ID of the product to be removed.
 - **Authentication:** Requires user authentication.
 
+###This API supports the following data structures:
+
+## Structure 1
+
+````json
+{
+   "name": "Xiaomi Redmi 9",
+   "brand": "Xiaomi",
+   "model": "Redmi 9",
+   "price": 10000,
+   "color": "red"
+}
+
+## Structure 2
+```json
+{
+   "name": "Xiaomi Redmi 9",
+   "details": {
+       "brand": "Xiaomi",
+       "model": "Redmi 9",
+       "color": "red"
+   },
+   "price":  10000,
+}
+
+## Structure 3
+```json
+[
+   {
+        "name": "Xiaomi Redmi 9",
+        "brand": "Xiaomi",
+        "model": "Redmi 9",
+        "data": [
+           {
+        	  "price":  10000,
+        	  "color": "red"
+           },
+          {
+        	  "price":  10000,
+        	  "color": "blue"
+           }
+        ]
+   },
+   {
+        "name": "Iphone 14 Pro",
+        "brand": "Iphone",
+        "model": "14 Pro",
+        "data": [
+           {
+        	  "price":  30000,
+        	  "color": "silver"
+           },
+          {
+        	  "price":  30100,
+        	  "color": "gold"
+           }
+        ]
+   }
+]
+
 ## Notes
 
 - All routes that require authentication must include a valid authentication token in the request header.
 - The authentication system can be implemented using JWT (JSON Web Tokens) or another secure method.
 
 This is the documentation for the RESTful API of the product management backend.
+````
